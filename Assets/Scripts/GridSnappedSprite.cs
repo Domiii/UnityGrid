@@ -6,7 +6,7 @@ using System.Collections;
 /// <summary>
 /// Draggable buildings are always snapped to grid, and can be dragged by mouse.
 /// </summary>
-public class DraggableBuilding : MonoBehaviour {
+public class GridSnappedSprite : MonoBehaviour {
 	public SpriteRenderer sprite;
 	public bool canDrag = true;
 

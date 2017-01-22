@@ -14,7 +14,7 @@ public class BuildingGridEditor : Editor {
 		grid.Awake ();
 
 		if (GUILayout.Button ("Snap all buildings")) {
-			var buildings = GameObject.FindObjectsOfType<DraggableBuilding> ();
+			var buildings = GameObject.FindObjectsOfType<GridSnappedSprite> ();
 
 			foreach (var building in buildings) {
 				grid.SnapToGrid (building.GetComponent<SpriteRenderer> ());
