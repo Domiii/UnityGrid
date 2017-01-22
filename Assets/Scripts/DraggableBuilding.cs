@@ -3,8 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class DraggableSprite : MonoBehaviour {
+/// <summary>
+/// Draggable buildings are always snapped to grid, and can be dragged by mouse.
+/// </summary>
+public class DraggableBuilding : MonoBehaviour {
 	public SpriteRenderer sprite;
+	public bool canDrag = true;
 
 	private bool mouseDown = false;
 	private Vector3 dragOffset;
@@ -30,10 +34,13 @@ public class DraggableSprite : MonoBehaviour {
 
 	void OnMouseDown() 
 	{
-		mouseDown = true;
-		var mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		print (mousePos - transform.position);
-		dragOffset = (transform.position - sprite.bounds.min) - BuildingGrid.Instance.SnapToGridFloor (mousePos - sprite.bounds.min + Vector3.one * 0.01f);
+		if (canDrag) {
+			mouseDown = true;
+			var mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+			// make sure that the cell of the sprite that the mouse touched is always in the same cell as the mouse
+			dragOffset = (transform.position - sprite.bounds.min) - BuildingGrid.Instance.SnapToGridFloor (mousePos - sprite.bounds.min + Vector3.one * 0.01f);
+		}
 	}
 
 	void OnMouseUp() 

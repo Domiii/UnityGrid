@@ -59,9 +59,10 @@ public class BuildingGrid : MonoBehaviour {
 			snappedMin.y = snappedMax.y - snappedH;
 		}
 
-		// if sprite does is not exactly a multiple of cellSize, make sure, it's centered inside the cells
-		snappedPos = sprite.transform.position + snappedMin - sprite.bounds.min;
+		// anchor position based on snapped min vertex
+		snappedPos = snappedMin + (sprite.transform.position - sprite.bounds.min);
 
+		// if sprite does is not exactly a multiple of cellSize, make sure, it's centered inside the cells
 		var offsetX = 0.5f * (cellSize - Mathf.Repeat(w-0.01f, cellSize));
 		var offsetY = 0.5f * (cellSize - Mathf.Repeat(h-0.01f, cellSize));
 		snappedPos.x += offsetX;
